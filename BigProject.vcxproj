@@ -66,14 +66,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="d3dAppFramework\Camera.cpp" />
     <ClCompile Include="d3dAppFramework\d3dApp.cpp" />
+    <ClCompile Include="d3dAppFramework\d3dUtil.cpp" />
     <ClCompile Include="d3dAppFramework\GameTimer.cpp" />
+    <ClCompile Include="d3dAppFramework\TextureMgr.cpp" />
+    <ClCompile Include="Effects.cpp" />
+    <ClCompile Include="InputLayouts.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="Sky.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="d3dAppFramework\Camera.h" />
     <ClInclude Include="d3dAppFramework\d3dApp.h" />
     <ClInclude Include="d3dAppFramework\d3dUtil.h" />
     <ClInclude Include="d3dAppFramework\GameTimer.h" />
+    <ClInclude Include="d3dAppFramework\TextureMgr.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

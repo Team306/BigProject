@@ -30,6 +30,9 @@
 #include <d3dx10.h>
 #include <dxerr.h>
 #include <cassert>
+#include <vector>
+
+
 
 
 //*****************************************************************************
@@ -61,10 +64,18 @@
 
 #define ReleaseCOM(x) { if(x){ x->Release();x = 0; } }
 
-
 //*****************************************************************************
 // Convenience functions.
 //*****************************************************************************
+
+void BuildGeoSphere(
+	UINT numSubdivisions,
+	float radius,
+	std::vector<D3DXVECTOR3>& vertices, 
+	std::vector<DWORD>& indices);
+
+// Returns the polar angle of the point (x,y) in [0, 2*PI).
+float AngleFromXY(float x, float y); 
 
 // Converts ARGB 32-bit color format to ABGR 32-bit color format.
 D3DX10INLINE UINT ARGB2ABGR(UINT argb)
@@ -92,7 +103,7 @@ D3DX10INLINE float RandF(float a, float b)
 // Returns random vector on the unit sphere.
 D3DX10INLINE D3DXVECTOR3 RandUnitVec3()
 {
-	D3DXVECTOR3 v(RandF(), RandF(), RandF());
+	D3DXVECTOR3 v(RandF(-1.0f, 1.0f), RandF(-1.0f, 1.0f), RandF(-1.0f, 1.0f));
 	D3DXVec3Normalize(&v, &v);
 	return v;
 }

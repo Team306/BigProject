@@ -46,7 +46,8 @@ D3DApp::D3DApp(HINSTANCE hInstance)
 	mDepthStencilView   = 0;
 	mFont               = 0;
 
-	mMainWndCaption = L"D3D10 Application";
+	//mMainWndCaption = L"D3D10 Application";
+	mMainWndCaption = L"BigProject by Team306";
 	md3dDriverType  = D3D10_DRIVER_TYPE_HARDWARE;
 	//mClearColor     = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
 	// Use CornflowerBlue instead
@@ -78,6 +79,21 @@ HWND D3DApp::getMainWnd()
 	return mhMainWnd;
 }
 
+void D3DApp::resetOMTargetsAndViewport()
+{
+	md3dDevice->OMSetRenderTargets(1, &mRenderTargetView, mDepthStencilView);
+
+	D3D10_VIEWPORT vp;
+	vp.TopLeftX = 0;
+	vp.TopLeftY = 0;
+	vp.Width    = mClientWidth;
+	vp.Height   = mClientHeight;
+	vp.MinDepth = 0.0f;
+	vp.MaxDepth = 1.0f;
+
+	md3dDevice->RSSetViewports(1, &vp);
+}
+
 int D3DApp::run()
 {
 	MSG msg = {0};
@@ -101,7 +117,7 @@ int D3DApp::run()
 			DWORD timeBegin = GetTickCount();			
 			// begin main loop
 
-			mTimer.tick();			
+			mTimer.tick();
 
 			if( !mAppPaused )
 				updateScene(mTimer.getDeltaTime());	
@@ -333,7 +349,7 @@ LRESULT D3DApp::msgProc(UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_MENUCHAR:
         // Don't beep when we alt-enter.
         return MAKELRESULT(0, MNC_CLOSE);
-
+ 
 	// Catch this message so to prevent the window from becoming too small.
 	case WM_GETMINMAXINFO:
 		((MINMAXINFO*)lParam)->ptMinTrackSize.x = 200;
@@ -414,7 +430,7 @@ void D3DApp::initDirect3D()
 #if defined(DEBUG) || defined(_DEBUG)  
     //createDeviceFlags |= D3D10_CREATE_DEVICE_DEBUG;
 #endif
-	// This flag is a bug 
+	// This flag is a bug
 
 	HR( D3D10CreateDeviceAndSwapChain(
 			0,                 //default adapter

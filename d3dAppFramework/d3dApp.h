@@ -25,6 +25,8 @@ public:
 	HINSTANCE getAppInst();
 	HWND      getMainWnd();
 
+	void resetOMTargetsAndViewport();
+
 	int run();
 
 	// Framework methods.  Derived client class overrides these methods to 
