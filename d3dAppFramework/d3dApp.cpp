@@ -95,7 +95,13 @@ int D3DApp::run()
 		// Otherwise, do animation/game stuff.
 		else
         {	
-			mTimer.tick();
+			// Lock frame per second in 60 fps
+			const int constFps = 60;
+			float timeInOneFps = 1000.0f / constFps;
+			DWORD timeBegin = GetTickCount();			
+			// begin main loop
+
+			mTimer.tick();			
 
 			if( !mAppPaused )
 				updateScene(mTimer.getDeltaTime());	
@@ -103,6 +109,11 @@ int D3DApp::run()
 				Sleep(50);
 
 			drawScene();
+
+			// Lock fps
+			DWORD timeTotal = GetTickCount() - timeBegin;
+			if (timeTotal < timeInOneFps)
+				Sleep(DWORD(timeInOneFps - timeTotal));
         }
     }
 	return (int)msg.wParam;
